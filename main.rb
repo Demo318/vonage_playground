@@ -7,15 +7,11 @@ require 'json'
 
 # own class files
 require '.\inbound_voice_call.rb'
+require '.\outbound_voice_call.rb'
+require '.\outbound_sms_message.rb'
 
 # Phone numbers, private credentials kept in separate class files, added to  .gitignore for privacy.
 require '.\phone_numbers.rb'
-
-helpers do
-  def parsed_body
-    JSON.parse(request.body.read)
-  end
-end
 
 
 before do
@@ -47,10 +43,7 @@ route :get, :post, '/webhooks/answer' do
 end
 
 route :get, :post, '/webhooks/dtmf' do
-  dtmf = params['dtmf'] || parsed_body['dtmf']
-
-  puts "params are " + params.to_s if params
-  puts "dtmf is " + dtmf.to_s if dtmf
+  dtmf = params['dtmf']
 
 
   [{

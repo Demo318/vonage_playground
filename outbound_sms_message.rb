@@ -1,0 +1,4 @@
+﻿class OutboundSMSMessage
+
+
+end
