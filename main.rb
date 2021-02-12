@@ -55,12 +55,11 @@ route :get, :post, '/webhooks/dtmf' do
     outbound_call = OutboundVoiceCall.new
     outbound_call.connect_external_number(numbers.devin_cell, '13165198556')
   when "2"
-    # send SMS to d
-    #   sms to reply to
-    #   receive and forward
+    nexmo = OutboundSMSMessage.new
+    nexmo.send_sms_message(to, from, "Simply reply here to send a text to Devin! ")
   when "3"
     nexmo = OutboundSMSMessage.new
-    nexmo.send_sms_message(to, from, "http://finalsigma.io")
+    nexmo.send_sms_message(to, from, "http://finalsigma.io ")
   when "4"
     # hear what devin thinks about k
   when "5"
