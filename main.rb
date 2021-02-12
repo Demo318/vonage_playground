@@ -44,7 +44,10 @@ route :get, :post, '/webhooks/answer' do
 end
 
 route :get, :post, '/webhooks/dtmf' do
-  dtmf = params['dtmf'] || parsed_body['dtmf']
+  pbody = parsed_body
+  dtmf = pbody['dtmf']
+  from = pbody['from']
+  to = pbody['to']
 
  
   case dtmf["digits"]
@@ -56,7 +59,8 @@ route :get, :post, '/webhooks/dtmf' do
     #   sms to reply to
     #   receive and forward
   when "3"
-    # receive sms to Devin's website
+    nexmo = OutboundSMSMessage.new
+    nexmo.send_sms_message(to, from, "http://finalsigma.io")
   when "4"
     # hear what devin thinks about k
   when "5"

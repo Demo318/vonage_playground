@@ -1,5 +1,6 @@
 ﻿require 'nexmo'
 require 'json'
+require '.\nexmo_creds.rb'
 
 class OutboundSMSMessage
     include NexmoCredentials
