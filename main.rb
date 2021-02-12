@@ -26,10 +26,6 @@ end
 
 route :get, :post, '/webhooks/answer' do
 
-  puts "the params are " + params.to_s
-  puts "the answer params are " + params["answer"].to_s
-
-
   call = InboundVoiceCall.new(params[:to],
                               params[:from],
                               params[:uuid],
@@ -45,11 +41,23 @@ end
 route :get, :post, '/webhooks/dtmf' do
   dtmf = params['dtmf']
 
-
-  [{
-    action: 'talk',
-    text: "You pressed #{dtmf['digits']}"
-  }].to_json
+  
+  case dtmf.to_i
+  when 1
+    # initiate phone call
+  when 2
+    # send SMS to d
+    #   sms to reply to
+    #   receive and forward
+  when 3
+    # receive sms to Devin's website
+  when 4
+    #hear what devin thinks about k
+  when 5
+    #hear what felix thinks
+  else
+    # "not an option" replay menu
+  end
 
 
 end
