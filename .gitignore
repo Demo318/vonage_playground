@@ -1,6 +1,5 @@
 ﻿private.key
 ngrok-stable-windows-amd64
 phone_numbers.rb
-test_dtmf.rb
 vonage_creds.rb
 nexmo_creds.rb
