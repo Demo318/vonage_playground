@@ -68,7 +68,15 @@ route :get, :post, '/webhooks/dtmf' do
     # "not an option" replay menu
   end
 
+end
 
+route :get, :post, '/webhooks/inbound-sms' do
+  # reply 'thank you for messaging'
+  # forward to devin's cell number (showing from number and message)
+  # reference: https://developer.nexmo.com/messaging/sms/code-snippets/receiving-an-sms
+  pbody = parsed_body
+  puts pbody
+  status 204
 end
 
 set :port, 3000
