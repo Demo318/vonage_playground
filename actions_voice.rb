@@ -1,6 +1,4 @@
-﻿require '.\vonage_creds.rb'
-
-module VoiceActions
+﻿module VoiceActions
 
     def connect_voice_number(outbound_number, from_number)
         {

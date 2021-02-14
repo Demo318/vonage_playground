@@ -32,15 +32,15 @@ end
 
 route :get, :post, '/webhooks/answer' do
 
-  call = InboundVoiceCall.new(params[:to],
-                              params[:from],
-                              params[:uuid],
-                              params[:conversation_uuid]
-                             )
+  client = Vonage.Client.new
 
-
-
- call.play_main_menu(request.base_url)
+  jsonify(
+    [
+      client.play_welcome,
+      client.play_menu_options,
+      client.receive_dtmf
+    ]
+  )
   
 end
 
