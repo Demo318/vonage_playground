@@ -10,6 +10,14 @@
         }
     end
 
+    def connection_notification()
+        {
+            action: "talk",
+            text: "Thank you, connecting you now",
+            bargeIn: "False"
+        }
+    end
+
     def play_welcome()
         {
             action: "talk",
@@ -31,7 +39,7 @@
         }
     end
 
-    def receive_dtmf()
+    def receive_dtmf(base_url)
         {
             action: "input",
             type: [ 'dtmf' ],

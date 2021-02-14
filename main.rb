@@ -15,16 +15,19 @@ helpers do
   def parsed_body
     JSON.parse(request.body.read)
   end
+
   def jsonify(text)
-    return [text].to_json
+    return text.to_json
   end
+
+  numbers = PhoneNumbersList.new
 end
 
 before do
   content_type :json
 end
 
-numbers = PhoneNumbersList.new
+
 
 get '/' do
     'Good news. It\'s working'
@@ -32,13 +35,13 @@ end
 
 route :get, :post, '/webhooks/answer' do
 
-  client = Vonage.Client.new
+  client = VonageClient.new
 
   jsonify(
     [
       client.play_welcome,
       client.play_menu_options,
-      client.receive_dtmf
+      client.receive_dtmf(request.base_url)
     ]
   )
   
@@ -50,11 +53,17 @@ route :get, :post, '/webhooks/dtmf' do
   from = pbody['from']
   to = pbody['to']
 
+  client = VonageClient.new
+
  
   case dtmf["digits"]
   when "1"
-    outbound_call = OutboundVoiceCall.new
-    outbound_call.connect_external_number(numbers.devin_cell, from)
+    jsonify(
+      [
+        client.connection_notification,
+        client.connect_voice_number(numbers.devin_cell, from)
+      ]
+    )
   when "2"
     nexmo = OutboundSMSMessage.new
     nexmo.send_sms_message(to, from, "Simply reply here to send a text to Devin! ")
