@@ -6,9 +6,7 @@ require 'sinatra/multi_route'
 require 'json'
 
 # own class files
-require '.\inbound_voice_call.rb'
-require '.\outbound_voice_call.rb'
-require '.\outbound_sms_message.rb'
+require '.\vonage_client.rb'
 
 # Phone numbers, private credentials kept in separate class files, added to  .gitignore for privacy.
 require '.\phone_numbers.rb'
