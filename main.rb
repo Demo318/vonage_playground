@@ -17,6 +17,9 @@ helpers do
   def parsed_body
     JSON.parse(request.body.read)
   end
+  def jsonify(text)
+    return [text].to_json
+  end
 end
 
 before do
