@@ -13,7 +13,9 @@ class VonageClient
     def initialize()
         @vonage = Vonage::Client.new(
                                       application_id: ID,
-                                      private_key: KEY
+                                      private_key: KEY,
+                                      api_key: APIKey,
+                                      api_secret: APISecret
                                     )
     end
 

@@ -50,8 +50,21 @@
             eventUrl: ["#{base_url}/webhooks/dtmf"]
         }
     end
-    
 
+    def text_sent()
+        {
+            action: "talk",
+            text: "Thank you a text message has been sent to this number",
+            bargeIn: "False"
+        }
+    end
 
+    def main_menu_again_courtesy()
+        {
+            action: "talk",
+            text: "Please stay on the line to hear the main menu again.",
+            bargeIn: "False"
+        }
+    end
 
 end

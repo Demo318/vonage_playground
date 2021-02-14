@@ -20,14 +20,13 @@ helpers do
     return text.to_json
   end
 
-  numbers = PhoneNumbersList.new
 end
 
 before do
   content_type :json
 end
 
-
+numbers = PhoneNumbersList.new
 
 get '/' do
     'Good news. It\'s working'
@@ -68,26 +67,24 @@ route :get, :post, '/webhooks/dtmf' do
     nexmo = OutboundSMSMessage.new
     nexmo.send_sms_message(to, from, "Simply reply here to send a text to Devin! ")
   when "3"
-    nexmo = OutboundSMSMessage.new
-    nexmo.send_sms_message(to, from, "http://finalsigma.io ")
+    client.send_sms_message(
+      client.vonage,
+      to,
+      from,
+      "http://finalsigma.io "
+    )
+    jsonify([
+      client.text_sent,
+      client.main_menu_again_courtesy,
+      client.play_menu_options,
+      client.receive_dtmf(request.base_url)
+    ])
   when "4"
     # hear what devin thinks about k
   when "5"
     # hear what felix thinks
   else
-    puts "0"
-    outbound_call = OutboundVoiceCall.new
-    puts "made new outbound call"
-    outbound_call.not_an_option_message
-    puts "sent not option"
-    call = InboundVoiceCall.new(params[:to],
-                              params[:from],
-                              params[:uuid],
-                              params[:conversation_uuid]
-                             )
-    puts "new call object"
-    call.play_main_menu(request.base_url)
-    puts "main menu sent to vonage"
+    
   end
 
 end
