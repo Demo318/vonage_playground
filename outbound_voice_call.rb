@@ -23,4 +23,13 @@ class OutboundVoiceCall
         }].to_json
     end
 
+    def not_an_option_message()
+
+        [{
+            action: "talk",
+            text: "I'm sorry that is not an option",
+            bargeIn: "False"
+        }].to_json
+    end
+
 end
