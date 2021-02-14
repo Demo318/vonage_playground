@@ -53,7 +53,7 @@ route :get, :post, '/webhooks/dtmf' do
   case dtmf["digits"]
   when "1"
     outbound_call = OutboundVoiceCall.new
-    outbound_call.connect_external_number(numbers.devin_cell, '13165198556')
+    outbound_call.connect_external_number(numbers.devin_cell, from)
   when "2"
     nexmo = OutboundSMSMessage.new
     nexmo.send_sms_message(to, from, "Simply reply here to send a text to Devin! ")
@@ -65,7 +65,19 @@ route :get, :post, '/webhooks/dtmf' do
   when "5"
     # hear what felix thinks
   else
-    # "not an option" replay menu
+    puts "0"
+    outbound_call = OutboundVoiceCall.new
+    puts "made new outbound call"
+    outbound_call.not_an_option_message
+    puts "sent not option"
+    call = InboundVoiceCall.new(params[:to],
+                              params[:from],
+                              params[:uuid],
+                              params[:conversation_uuid]
+                             )
+    puts "new call object"
+    call.play_main_menu(request.base_url)
+    puts "main menu sent to vonage"
   end
 
 end
