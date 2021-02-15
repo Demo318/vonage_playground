@@ -54,7 +54,7 @@
     def text_sent()
         {
             action: "talk",
-            text: "Thank you a text message has been sent to this number",
+            text: "Thank you. A text message has been sent to your phone.",
             bargeIn: "False"
         }
     end
@@ -62,7 +62,15 @@
     def main_menu_again_courtesy()
         {
             action: "talk",
-            text: "Please stay on the line to hear the main menu again.",
+            text: "Stay on the line to hear the main menu again.",
+            bargeIn: "False"
+        }
+    end
+
+    def invalid_option()
+        {
+            action: "talk",
+            text: "I'm sorry, that entry is invalid.",
             bargeIn: "False"
         }
     end
@@ -111,7 +119,7 @@
         {
             action: "stream",
             streamUrl: ["#{base_url}/media/musicalperformance.mp3"],
-            level: "1",
+            level: "-0.25",
             bargeIn: "True"
         }
 
