@@ -29,12 +29,12 @@
     def play_menu_options()
         {
             action: "talk",
-            text: "Please choos from one of the following options"\
-                  "Press one to call Devin's cellular phone"\
-                  "Press two to send Devin a text message"\
-                  "Press three to receive a link to Devin's website"\
-                  "Press four to hear what Devin thinks about Matt Kanaskie"\
-                  "Press five to hear what Devin's four-year-old son Felix thinks about Devin",
+            text: "Please choose from one of the following options. "\
+                  "Press one to call Devin's cellular phone. "\
+                  "Press two to send Devin a text message. "\
+                  "Press three to receive a link to Devin's website. "\
+                  "Press four to hear a musical performance by Devin Mork. "\
+                  "Press five if it's your birthday.",
             bargeIn: "True"
         }
     end
