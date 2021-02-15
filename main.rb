@@ -46,6 +46,18 @@ route :get, :post, '/webhooks/answer' do
   
 end
 
+route :get, :post, '/webhooks/main_menu_repeat' do
+  client = VonageClient.new
+
+  jsonify(
+    [
+      client.main_menu_again_courtesy,
+      client.play_menu_options,
+      client.receive_dtmf(request.base_url)
+    ]
+  )
+end
+
 route :get, :post, '/webhooks/dtmf' do
   pbody = parsed_body
   dtmf = pbody['dtmf']
@@ -80,12 +92,29 @@ route :get, :post, '/webhooks/dtmf' do
     ])
   when "4"
     # musical performance
+    jsonify([
+      client.force_return_to_main_menu_message,
+      client.introduce_musical_performance,
+      client.play_musical_performance(request.base_url)
+      client.force_return_to_main_menu(request.base_url)
+    ])
   when "5"
     # happy birthday
+    #TODO: Dispatch SMS w/ YouTube link.
+    jsonify([
+      client.force_return_to_main_menu_message,
+      client.introduce_happy_birthday,
+      client.play_happy_birthday(request.base_url)
+      client.force_return_to_main_menu(request.base_url)
+    ])
   else
     # not an option, main menu again
   end
 
+end
+
+route :get, :post, '/webhooks/events' do
+  puts parsed_body.to_s
 end
 
 route :get, :post, '/webhooks/inbound-sms' do
@@ -95,6 +124,10 @@ route :get, :post, '/webhooks/inbound-sms' do
   pbody = parsed_body
   puts pbody
   status 204
+end
+
+get '/media/:filename' do |filename|
+  send_file "./media/#{filename}", :filename => filename, :type => 'Application/octet-stream'
 end
 
 set :port, 3000

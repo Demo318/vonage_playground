@@ -67,4 +67,63 @@
         }
     end
 
+    def force_return_to_main_menu_message()
+        {
+            action: "talk",
+            text: "Press any key to return to the main menu.",
+            bargeIn: "True"
+        }
+
+    end
+
+    def force_return_to_main_menu(base_url)
+        {
+            action: "input",
+            type: ['dtmf'],
+            dtmf: {
+                'maxDigits': 1,
+                'timeOut': 5
+            },
+            eventUrl: ["#{base_url}/webhooks/main_menu_repeat"]
+        }
+    end
+
+    def introduce_musical_performance()
+        {
+            action: "talk",
+            text: "The following is a performance of Those Canaan Days from Joseph and"\
+                  "The Technicolor Dreamcoat. A text message with a link to the original You Tube "\
+                  "video has been sent to your phone. Enjoy",
+            bargeIn: "True"
+        }
+    end
+
+
+    def introduce_happy_birthday()
+        {
+            action: "talk",
+            text: "Devin's two-year-old daughter Talia would like to wish you a Happy Birthday!",
+            bargeIn: "True"
+        }
+    end
+
+    def play_musical_performance(base_url)
+        {
+            action: "stream",
+            streamUrl: ["#{base_url}/media/musicalperformance.mp3"],
+            level: "1",
+            bargeIn: "True"
+        }
+
+    end
+
+    def play_happy_birthday(base_url)
+        {
+            action: "stream",
+            streamUrl: ["#{base_url}/media/happybirthday.mp3"],
+            level: "1",
+            bargeIn: "True"
+        }
+    end
+
 end
