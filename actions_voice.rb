@@ -42,7 +42,7 @@
     def receive_dtmf(base_url)
         {
             action: "input",
-            type: [ 'dtmf' ],
+            type: ['dtmf'],
             dtmf: {
                 'maxDigits': 1,
                 'timeOut': 5

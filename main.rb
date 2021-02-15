@@ -8,7 +8,7 @@ require 'json'
 # own class files
 require '.\vonage_client.rb'
 
-# Phone numbers, private credentials kept in separate class files, added to  .gitignore for privacy.
+# Phone numbers, private credentials kept in separate class files, added to .gitignore for privacy.
 require '.\phone_numbers.rb'
 
 helpers do
@@ -64,8 +64,7 @@ route :get, :post, '/webhooks/dtmf' do
       ]
     )
   when "2"
-    nexmo = OutboundSMSMessage.new
-    nexmo.send_sms_message(to, from, "Simply reply here to send a text to Devin! ")
+    # initiate 2-way SMS w/ Devin
   when "3"
     client.send_sms_message(
       client.vonage,
