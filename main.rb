@@ -80,11 +80,11 @@ route :get, :post, '/webhooks/dtmf' do
       client.receive_dtmf(request.base_url)
     ])
   when "4"
-    # hear what devin thinks about k
+    # musical performance
   when "5"
-    # hear what felix thinks
+    # happy birthday
   else
-    
+    # not an option, main menu again
   end
 
 end
